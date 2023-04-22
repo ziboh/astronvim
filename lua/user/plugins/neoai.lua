@@ -24,6 +24,9 @@ return {
             "<leader>ac",
             function()
                 local input = vim.fn.input("Input Context: ")
+                if input == "" then
+                    return
+                end
                 vim.cmd("NeoAIContext " .. input)
             end,
             desc = "NeoAi Context",
