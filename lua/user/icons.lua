@@ -1,0 +1,5 @@
+return {
+	DapBreakpoint = "",
+	DapBreakpointCondition = "",
+	DapBreakpointRejected = "",
+}
