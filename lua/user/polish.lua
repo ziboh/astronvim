@@ -67,7 +67,7 @@ return function()
 	})
 
 	vim.api.nvim_create_autocmd("BufRead", {
-		pattern = { ".zimrc", "yadm/bootstrap" },
+		pattern = { ".zimrc", "bootstrap" },
 		callback = function()
 			vim.bo.filetype = "zsh"
 		end,

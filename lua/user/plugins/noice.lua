@@ -120,9 +120,7 @@ return {
 						style = "rounded",
 						padding = { 0, 1 },
 					},
-					win_options = {
-						winhighlight = { Normal = "Normal", FloatBorder = "DiagnosticInfo" },
-					},
+					win_options = { winhighlight = { Normal = "Normal", FloatBorder = "DiagnosticInfo" } },
 				},
 			},
 		},
@@ -146,7 +144,7 @@ return {
 	},
 	{
 		"Wansmer/treesj",
-		keys = { { "<leader>m", "<CMD>TSJToggle<CR>", desc = "Toggle Treesitter Join" } },
+		keys = { { "zt", "<CMD>TSJToggle<CR>", desc = "Toggle Treesitter Join" } },
 		cmd = { "TSJToggle", "TSJSplit", "TSJJoin" },
 		dependencies = { "nvim-treesitter/nvim-treesitter" },
 		opts = { use_default_keymaps = false },
