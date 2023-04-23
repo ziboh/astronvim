@@ -42,19 +42,6 @@ return function()
 		end,
 	})
 
-	-- 新建window或自动设置winblend 为0
-	-- vim.api.nvim_create_autocmd("BufWinEnter", {
-	-- 	pattern = "*",
-	-- 	callback = function()
-	-- 		vim.defer_fn(function()
-	-- 			local winblend = vim.api.nvim_win_get_option(0, "winblend")
-	-- 			if winblend ~= 0 then
-	-- 				vim.api.nvim_win_set_option(0, "winblend", 0)
-	-- 			end
-	-- 		end, 0)
-	-- 	end,
-	-- })
-
 	-- 判断是否是wsl
 	if vim.fn.has("wsl") == 1 then
 		---@diagnostic disable-next-line:undefined-field
@@ -80,7 +67,7 @@ return function()
 	})
 
 	vim.api.nvim_create_autocmd("BufRead", {
-		pattern = ".zimrc",
+		pattern = { ".zimrc", "yadm/bootstrap" },
 		callback = function()
 			vim.bo.filetype = "zsh"
 		end,

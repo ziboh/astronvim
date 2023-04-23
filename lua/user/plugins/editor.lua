@@ -105,7 +105,7 @@ return {
   {
     "ggandor/leap-ast.nvim",
     init = function()
-      vim.keymap.set({ "n", "x", "o" }, "z", function()
+      vim.keymap.set({ "n", "x", "o" }, "m", function()
         require("leap-ast").leap()
       end, {desc = "leap-ash"})
     end,

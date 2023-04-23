@@ -20,5 +20,9 @@ return {
 		opts = {
 			virtual_lines = { only_current_line = true },
 		},
+		config = function()
+			require("lsp_lines").setup()
+			require("lsp_lines").toggle()
+		end,
 	},
 }

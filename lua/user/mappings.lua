@@ -3,6 +3,7 @@ return function(maps)
 	local utils = require("astronvim.utils")
 	local is_available = utils.is_available
 	local sections = {
+		a = { desc = "󰚩 Ai" },
 		f = { desc = "󰍉 Find" },
 		p = { desc = "󰏖 Packages" },
 		l = { desc = " LSP" },
@@ -16,16 +17,19 @@ return function(maps)
 		x = { desc = " Trouble" },
 		t = { desc = "󰗊 Translate" },
 		o = { desc = " Task" },
-		n = { desc = "🆕new" },
+		n = { desc = "󰎔 New" },
 		["<tab>"] = { desc = " tab" },
 		["resplace"] = { desc = " resplace" },
 	}
-
+	-- new
 	maps.n["<leader>n"] = sections.n
 	maps.n["<leader>nn"] = { "<cmd>enew<cr>", desc = "new file" }
+
+	-- genral
 	maps.n["q"] = "<Nop>"
 	maps.n["<A-q>"] = "q"
 	maps.i["<C-s>"] = { "<esc><cmd>w<cr>a", desc = "save" }
+
 	-- window
 	maps.n["<leader>w"] = sections.w
 	maps.n["<leader>ww"] = { "<c-w>w", desc = "other window" }
@@ -35,30 +39,18 @@ return function(maps)
 	maps.n["<leader>wo"] = { "<c-w>o", desc = "only window" }
 	maps.n["<leader>wf"] = { "<c-w>pa", desc = "switch window" }
 
-	if is_available("nvim-dap") then
-		maps.n["<leader>d"] = sections.d
-		-- modified function keys found with `showkey -a` in the terminal to get key code
-		-- run `nvim -V3log +quit` and search through the "Terminal info" in the `log` file for the correct keyname
-		maps.n["<leader>dU"] = {
-			function()
-				require("dapui").setup()
-			end,
-			desc = "dapui restart",
-		}
-		-- Spectre
-		if is_available("nvim-spectre") then
-			maps.v["<leader>s"] = sections["resplace"]
-		end
+	-- Spectre
+	if is_available("nvim-spectre") then
+		maps.v["<leader>s"] = sections["resplace"]
 	end
+
 	-- Overseer
 	if is_available("overseer.nvim") then
 		maps.n["<leader>o"] = sections.o
 	else
 		maps.n["<leader>o"] = false
 	end
-
 	maps.n["<leader>ou"] = { require("user.utils").open_url, desc = "Open url" }
-	maps.n.n = false
 
 	-- Alpha
 	if is_available("alpha-nvim") then
@@ -335,8 +327,10 @@ return function(maps)
 	maps.n["<leader><tab>l"] = { "<cmd>tablast<cr>", desc = "Last Tab" }
 	maps.n["<leader><tab><tab>"] = { "<cmd>tabnew<cr>", desc = "New Tab" }
 	maps.n["<leader><tab>n"] = { "<cmd>tabnext<cr>", desc = "Next Tab" }
-	maps.n["<leader><tab>d"] = { "<cmd>tabclose<cr>", desc = "Close Tab" }
+	maps.n["]<tab>"] = { "<cmd>tabnext<cr>", desc = "Next Tab" }
 	maps.n["<leader><tab>p"] = { "<cmd>tabprevious<cr>", desc = "Previous Tab" }
+	maps.n["[<tab>"] = { "<cmd>tabprevious<cr>", desc = "Previous Tab" }
+	maps.n["<leader><tab>d"] = { "<cmd>tabclose<cr>", desc = "Close Tab" }
 
 	maps.n["<leader>un"] = {
 		function()
@@ -347,6 +341,7 @@ return function(maps)
 	maps.n["<leader>uN"] = { ui.change_number, desc = "Change line numbering" }
 
 	if is_available("nvim-dap") then
+		maps.n["<leader>d"] = sections.d
 		maps.n["<F9>"] = {
 			function()
 				require("persistent-breakpoints.api").toggle_breakpoint()
@@ -372,18 +367,15 @@ return function(maps)
 			end,
 			desc = "Clear Breakpoints",
 		}
-		maps.n["<leader>dbc"] = {
-			function()
-				require("persistent-breakpoints.api").clear_all_breakpoints()
-			end,
-			desc = "Clear Breakpoints",
-		}
-		maps.n["<leader>dbt"] = {
-			function()
-				require("persistent-breakpoints.api").toggle_breakpoint()
-			end,
-			desc = "Toggle Breakpoint (F9)",
-		}
+		maps.n["<leader>dbc"] = { function() require("persistent-breakpoints.api").clear_all_breakpoints() end, desc = "Clear Breakpoints" }
+		maps.n["<leader>dbt"] = { function() require("persistent-breakpoints.api").toggle_breakpoint() end, desc = "Toggle Breakpoint (F9)" }
+		maps.n["<leader>dU"] = { function() require("dapui").setup() end, desc = "dapui restart" }
+	end
+
+	-- neoai
+	if is_available("neoai.nvim") then
+		maps.n["<leader>a"] = sections.a
+		maps.v["<leader>a"] = sections.a
 	end
 	return maps
 end
