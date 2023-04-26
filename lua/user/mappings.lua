@@ -27,6 +27,8 @@ return function(maps)
 
 	-- genral
 	maps.n["q"] = "<Nop>"
+	maps.v["J"] = "j"
+	maps.v["K"] = "k"
 	maps.n["<A-q>"] = "q"
 	maps.i["<C-s>"] = { "<esc><cmd>w<cr>a", desc = "save" }
 
@@ -83,7 +85,7 @@ return function(maps)
 		maps.n["<leader>sd"] = { "<cmd>SessionManager! delete_session<cr>", desc = "Delete session" }
 		maps.n["<leader>sf"] = { "<cmd>SessionManager! load_session<cr>", desc = "Search sessions" }
 		maps.n["<leader>s."] =
-		{ "<cmd>SessionManager! load_current_dir_session<cr>", desc = "Load current directory session" }
+			{ "<cmd>SessionManager! load_current_dir_session<cr>", desc = "Load current directory session" }
 		maps.n["<leader>S"] = false
 		maps.n["<leader>Sl"] = false
 		maps.n["<leader>Ss"] = false
@@ -339,37 +341,84 @@ return function(maps)
 		desc = "Delete all Notifications",
 	}
 	maps.n["<leader>uN"] = { ui.change_number, desc = "Change line numbering" }
-
 	if is_available("nvim-dap") then
 		maps.n["<leader>d"] = sections.d
-		maps.n["<F9>"] = {
-			function()
-				require("persistent-breakpoints.api").toggle_breakpoint()
-			end,
-			desc = "Debugger: Toggle Breakpoint",
-		}
 		maps.n["<leader>db"] = { desc = "Breakpoints" }
-		maps.n["<leader>dbb"] = {
+		maps.n["<leader>dU"] = {
 			function()
-				require("persistent-breakpoints.api").set_conditional_breakpoint()
+				require("dapui").setup()
 			end,
-			desc = "Set Conditional Breakpoint",
+			desc = "dapui restart",
 		}
-		maps.n["<leader>dt"] = {
-			function()
-				require("persistent-breakpoints.api").toggle_breakpoint()
-			end,
-			desc = "Toggle Breakpoint (F9)",
-		}
-		maps.n["<leader>dB"] = {
-			function()
-				require("persistent-breakpoints.api").clear_all_breakpoints()
-			end,
-			desc = "Clear Breakpoints",
-		}
-		maps.n["<leader>dbc"] = { function() require("persistent-breakpoints.api").clear_all_breakpoints() end, desc = "Clear Breakpoints" }
-		maps.n["<leader>dbt"] = { function() require("persistent-breakpoints.api").toggle_breakpoint() end, desc = "Toggle Breakpoint (F9)" }
-		maps.n["<leader>dU"] = { function() require("dapui").setup() end, desc = "dapui restart" }
+		if is_available("persistent-breakpoints.nvim") then
+			maps.n["<leader>dbb"] = {
+				function()
+					require("persistent-breakpoints.api").set_conditional_breakpoint()
+				end,
+				desc = "Set Conditional Breakpoint",
+			}
+			maps.n["<leader>dt"] = {
+				function()
+					require("persistent-breakpoints.api").toggle_breakpoint()
+				end,
+				desc = "Toggle Breakpoint (F9)",
+			}
+			maps.n["<leader>dB"] = {
+				function()
+					require("persistent-breakpoints.api").clear_all_breakpoints()
+				end,
+				desc = "Clear Breakpoints",
+			}
+			maps.n["<F9>"] = {
+				function()
+					require("persistent-breakpoints.api").toggle_breakpoint()
+				end,
+				desc = "Debugger: Toggle Breakpoint",
+			}
+			maps.n["<leader>dbc"] = {
+				function()
+					require("persistent-breakpoints.api").clear_all_breakpoints()
+				end,
+				desc = "Clear Breakpoints",
+			}
+			maps.n["<leader>dbt"] = {
+				function()
+					require("persistent-breakpoints.api").toggle_breakpoint()
+				end,
+				desc = "Toggle Breakpoint (F9)",
+			}
+		else
+			maps.n["<leader>dt"] = {
+				function()
+					require("dap").toggle_breakpoint()
+				end,
+				desc = "Toggle Breakpoint (F9)",
+			}
+			maps.n["<leader>dB"] = {
+				function()
+					require("dap").clear_breakpoints()
+				end,
+				desc = "Clear Breakpoints",
+			}
+			maps.n["<leader>dbc"] = {
+				function()
+					require("dap").clear_breakpoints()
+				end,
+				desc = "Clear Breakpoints",
+			}
+			maps.n["<leader>dbt"] = {
+				function()
+					require("dap").toggle_breakpoint()
+				end,
+				desc = "Toggle Breakpoint (F9)",
+			}
+			maps.n["<leader>dbb"] = {
+				function()
+					require("dap").set_exception_breakpoints()
+				end,
+				desc = "Set Conditional Breakpoint",
+			}
+		end
 	end
 
 	-- neoai

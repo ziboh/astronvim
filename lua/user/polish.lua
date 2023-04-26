@@ -72,4 +72,5 @@ return function()
 			vim.bo.filetype = "zsh"
 		end,
 	})
+	vim.api.nvim_create_augroup("q_close_windows", { clear = true })
 end

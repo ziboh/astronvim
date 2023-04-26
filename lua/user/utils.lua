@@ -180,16 +180,6 @@ M.config_python_dap = function()
 	end)
 end
 
--- 将winblend不为0的window设置为0
-M.clear_winblend = function()
-	for _, win in ipairs(vim.api.nvim_list_wins()) do
-		local winblend = vim.api.nvim_win_get_option(win, "winblend")
-		if winblend ~= 0 then
-			vim.api.nvim_win_set_option(win, "winblend", 0)
-		end
-	end
-end
-
 -- 获取当前光标所在的引号字符串
 function M.get_quoted_string()
 	local _, col = unpack(vim.api.nvim_win_get_cursor(0))

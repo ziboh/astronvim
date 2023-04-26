@@ -48,9 +48,10 @@ return {
 		end,
 		opts = {
 			presets = {
-				bottom_search = true,     -- use a classic bottom cmdline for search
-				-- command_palette = true, -- position the cmdline and popupmenu together
+				bottom_search = false, -- use a classic bottom cmdline for search
+				command_palette = true, -- position the cmdline and popupmenu together
 				long_message_to_split = true, -- long messages will be sent to a split
+				lsp_doc_border = true,
 			},
 			cmdline = {
 				enabled = true,
@@ -154,7 +155,7 @@ return {
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		config = true,
 		keys = {
-			{ "<leader>nc", ":lua require('neogen').generate({ type = 'class' })<CR>",    desc = "Generate Class" },
+			{ "<leader>nc", ":lua require('neogen').generate({ type = 'class' })<CR>", desc = "Generate Class" },
 			{ "<leader>nf", ":lua require('neogen').generate({ type = 'function' })<CR>", desc = "Generate Function" },
 		},
 	},
