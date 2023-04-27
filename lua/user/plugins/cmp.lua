@@ -1,8 +1,27 @@
 return {
 	{
+		"L3MON4D3/LuaSnip",
+		config = function(plugin, opts)
+			local ls = require("luasnip")
+			local s = ls.snippet
+			local t = ls.text_node
+			local i = ls.insert_node
+			ls.add_snippets("all", {
+				s("三元表达式", {
+					-- equivalent to "${1:cond} ? ${2:then} : ${3:else}"
+					i(1, "cond"),
+					t(" ? "),
+					i(2, "then"),
+					t(" : "),
+					i(3, "else"),
+				}),
+			})
+			require("plugins.configs.luasnip")(plugin, opts)
+		end,
+	},
+	{
 		"zbirenbaum/copilot.lua",
 		cmd = "Copilot",
-		event = "User AstroFile",
 		opts = { suggestion = { auto_trigger = true, debounce = 150 } },
 	},
 	{

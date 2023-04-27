@@ -4,8 +4,8 @@ HOME = os.getenv("HOME")
 function M.pick_windows()
 	local picker = require("window-picker")
 	local picked_window_id = picker.pick_window({
-				include_current_win = true,
-			}) or vim.api.nvim_get_current_win()
+		include_current_win = true,
+	}) or vim.api.nvim_get_current_win()
 	vim.api.nvim_set_current_win(picked_window_id)
 end
 
@@ -250,16 +250,14 @@ function M.get_quoted_string()
 	end
 end
 
-function M.open_github()
+function M.open_github_url()
 	local github_url = M.get_quoted_string()
-	-- vim.cmd("TermExec cmd=" .. [['gith ]] .. github_url .. [[' open=0]])
-	require("toggleterm").exec_command("cmd=" .. [['gith ]] .. github_url .. [[' open=0]], 98)
+	require("toggleterm").exec("chrome https://github.com/" .. github_url, 98, nil, nil, nil, nil, false)
 end
 
 function M.open_url()
-	local github_url = M.get_quoted_string()
-	-- vim.cmd("TermExec cmd=" .. [['gith ]] .. github_url .. [[' open=0]])
-	require("toggleterm").exec_command("cmd=" .. [['chrome ]] .. github_url .. [[' open=0]], 98)
+	local url = M.get_quoted_string()
+	require("toggleterm").exec("chrome " .. github_url, 98, nil, nil, nil, nil, false)
 end
 
 M.term_toggle = function(cmd, direction, count)

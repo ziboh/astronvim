@@ -166,19 +166,31 @@ return function(maps)
 		maps.t["<C-'>"] = false
 		maps.n["<A-1>"] = {
 			function()
-				require("user.utils").term_toggle("zsh", "horizontal", 100)
+				local cmd = nil
+				if vim.fn.has("win32") == 1 then
+					cmd = "pwsh"
+				end
+				require("user.utils").term_toggle(cmd, "horizontal", 100)
 			end,
 			desc = "ToggleTerm horizontal split",
 		}
 		maps.n["<A-2>"] = {
 			function()
-				require("user.utils").term_toggle("zsh", "vertical", 101)
+				local cmd = nil
+				if vim.fn.has("win32") == 1 then
+					cmd = "pwsh"
+				end
+				require("user.utils").term_toggle(cmd, "vertical", 101)
 			end,
 			desc = "ToggleTerm vertical split",
 		}
 		maps.n["<A-3>"] = {
 			function()
-				require("user.utils").term_toggle("zsh", "float", 102)
+				local cmd = nil
+				if vim.fn.has("win32") == 1 then
+					cmd = "pwsh"
+				end
+				require("user.utils").term_toggle(cmd, "float", 102)
 			end,
 			desc = "ToggleTerm float",
 		}
@@ -323,7 +335,10 @@ return function(maps)
 	maps.i["<A-k>"] = { "<Esc>:m .-2<CR>==gi", desc = "Move line up" }
 	maps.v["<A-j>"] = { ":m '>+1<CR>gv-gv", desc = "Move line down" }
 	maps.v["<A-k>"] = { ":m '<-2<CR>gv-gv", desc = "Move line up" }
-	maps.n["<leader>go"] = { require("user.utils").open_github, desc = "Open github" }
+	maps.n["<leader>go"] = {
+		require("user.utils").open_github_url,
+		desc = "Open github",
+	}
 	maps.n["<leader><tab>"] = sections["<tab>"]
 	maps.n["<leader><tab>f"] = { "<cmd>tabfirst<cr>", desc = "First Tab" }
 	maps.n["<leader><tab>l"] = { "<cmd>tablast<cr>", desc = "Last Tab" }
