@@ -164,7 +164,7 @@ return function(maps)
 		maps.t["<F7>"] = false
 		maps.n["<C-'>"] = false
 		maps.t["<C-'>"] = false
-		maps.n["<A-1>"] = {
+		maps.n["<leader>1"] = {
 			function()
 				local cmd = nil
 				if vim.fn.has("win32") == 1 then
@@ -174,7 +174,7 @@ return function(maps)
 			end,
 			desc = "ToggleTerm horizontal split",
 		}
-		maps.n["<A-2>"] = {
+		maps.n["<leader>2"] = {
 			function()
 				local cmd = nil
 				if vim.fn.has("win32") == 1 then
@@ -184,7 +184,7 @@ return function(maps)
 			end,
 			desc = "ToggleTerm vertical split",
 		}
-		maps.n["<A-3>"] = {
+		maps.n["<leader>3"] = {
 			function()
 				local cmd = nil
 				if vim.fn.has("win32") == 1 then
