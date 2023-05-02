@@ -2,9 +2,9 @@ return {
 	"p00f/clangd_extensions.nvim", -- install lsp plugin
 	{
 		"williamboman/mason-lspconfig.nvim",
-		opts = {
-			ensure_installed = { "clangd" }, -- automatically install lsp
-		},
+		opts = function(_,opts)
+			opts.ensure_installed = { "clangd" }
+		end,
 	},
 	{
 		"onsails/lspkind.nvim",
@@ -17,6 +17,7 @@ return {
 	},
 	{
 		"https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+		enabled = true,
 		opts = {
 			virtual_lines = { only_current_line = true },
 		},

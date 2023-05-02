@@ -46,6 +46,11 @@ return function(maps)
 		maps.v["<leader>s"] = sections["resplace"]
 	end
 
+	-- Neo-Tree
+	if is_available("neo-tree.nvim") then
+		maps.n["<leader>e"] = { "<cmd>Neotree toggle filesystem<cr>", desc = "Toggle Explorer" }
+	end
+
 	-- Overseer
 	if is_available("overseer.nvim") then
 		maps.n["<leader>o"] = sections.o
@@ -194,21 +199,23 @@ return function(maps)
 			end,
 			desc = "ToggleTerm float",
 		}
-		maps.t["<A-1>"] = maps.n["<A-1>"]
-		maps.t["<A-2>"] = maps.n["<A-2>"]
-		maps.t["<A-3>"] = maps.n["<A-3>"]
+		maps.t["<leader>1"] = maps.n["<leader>1"]
+		maps.t["<leader>2"] = maps.n["<leader>2"]
+		maps.t["<leader>3"] = maps.n["<leader>3"]
 	end
 
 	if is_available("telescope.nvim") then
 		if is_available("todo-comments.nvim") then
 			maps.n["<leader>ft"] = { "<cmd>TodoTelescope<cr>", desc = "Find Todo" }
 		end
+
 		maps.n["<leader>fT"] = {
 			function()
 				require("telescope.builtin").colorscheme({ enable_preview = true })
 			end,
 			desc = "Find themes",
 		}
+
 		maps.n["<leader>fH"] = { "<cmd>Telescope highlights<cr>", desc = "Search Highlight Groups" }
 		maps.n["<leader><space>"] = {
 			function()
@@ -216,13 +223,16 @@ return function(maps)
 			end,
 			desc = "Find files",
 		}
+
 		maps.n["<leader>fF"] = false
+
 		maps.n["<leader>ff"] = {
 			function()
 				require("telescope.builtin").find_files({ hidden = true, no_ignore = true })
 			end,
 			desc = "Find all files",
 		}
+
 		maps.n["<leader>fp"] = {
 			function()
 				require("telescope").extensions.projects.projects({})
@@ -236,25 +246,30 @@ return function(maps)
 		"<cmd>Bdelete<cr>",
 		desc = "Close buffer",
 	}
+
 	maps.n["<leader>C"] = false
+
 	maps.n["]b"] = {
 		function()
 			require("astronvim.utils.buffer").nav(vim.v.count > 0 and vim.v.count or 1)
 		end,
 		desc = "Next buffer",
 	}
+
 	maps.n["[b"] = {
 		function()
 			require("astronvim.utils.buffer").nav(-(vim.v.count > 0 and vim.v.count or 1))
 		end,
 		desc = "Previous buffer",
 	}
+
 	maps.n[">b"] = {
 		function()
 			require("astronvim.utils.buffer").move(vim.v.count > 0 and vim.v.count or 1)
 		end,
 		desc = "Move buffer tab right",
 	}
+
 	maps.n["<b"] = {
 		function()
 			require("astronvim.utils.buffer").move(-(vim.v.count > 0 and vim.v.count or 1))
@@ -263,18 +278,21 @@ return function(maps)
 	}
 
 	maps.n["<leader>b"] = sections.b
+
 	maps.n["<leader>bo"] = {
 		function()
 			require("astronvim.utils.buffer").close_all(true)
 		end,
 		desc = "Close all buffers except current",
 	}
+
 	maps.n["<leader>ba"] = {
 		function()
 			require("astronvim.utils.buffer").close_all()
 		end,
 		desc = "Close all buffers",
 	}
+
 	maps.n["<leader>bD"] = {
 		function()
 			require("astronvim.utils.status").heirline.buffer_picker(function(bufnr)
@@ -283,6 +301,7 @@ return function(maps)
 		end,
 		desc = "Select buffer from tabline",
 	}
+
 	maps.n["<leader>bj"] = {
 		function()
 			require("astronvim.utils.status").heirline.buffer_picker(function(bufnr)
@@ -295,12 +314,14 @@ return function(maps)
 		"<cmd>Bdelete<cr>",
 		desc = "Delete current buffer",
 	}
+
 	maps.n["<leader>bsm"] = {
 		function()
 			require("astronvim.utils.buffer").sort("modified")
 		end,
 		desc = "Sort by modification (buffers)",
 	}
+
 	maps.n["<leader>b\\"] = {
 		function()
 			require("astronvim.utils.status").heirline.buffer_picker(function(bufnr)
@@ -310,6 +331,7 @@ return function(maps)
 		end,
 		desc = "Horizontal split buffer from tabline",
 	}
+
 	maps.n["<leader>b|"] = {
 		function()
 			require("astronvim.utils.status").heirline.buffer_picker(function(bufnr)

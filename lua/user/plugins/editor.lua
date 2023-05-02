@@ -74,6 +74,12 @@ return {
 		},
 	},
 	{
+		"antoinemadec/FixCursorHold.nvim",
+		init = function()
+			vim.g.cursorhold_updatetime = 100
+		end,
+	},
+	{
 		"AckslD/nvim-neoclip.lua",
 		dependencies = {
 			"tami5/sqlite.lua",

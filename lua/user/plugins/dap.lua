@@ -1,5 +1,4 @@
 return {
-	"mfussenegger/nvim-dap-python",
 	{
 		"rcarriga/nvim-dap-ui",
 		enabled = vim.fn.has("win32") == 0,

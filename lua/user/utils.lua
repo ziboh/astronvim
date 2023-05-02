@@ -165,21 +165,6 @@ function M.print_bufnr_filetype(ft)
 	print(str)
 end
 
-M.config_python_dap = function()
-	local dap_python = require("dap-python")
-
-	-- Setup dap for python
-	local mason_path = vim.fn.glob(vim.fn.stdpath("data") .. "/mason/")
-	pcall(function()
-		dap_python.setup(mason_path .. "packages/debugpy/venv/bin/python")
-	end)
-
-	pcall(function()
-		dap_python.test_runner = "unittest"
-		dap_python.resolve_python = require("user.utils").get_workpath_python_resolve
-	end)
-end
-
 -- 获取当前光标所在的引号字符串
 function M.get_quoted_string()
 	local _, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -257,7 +242,7 @@ end
 
 function M.open_url()
 	local url = M.get_quoted_string()
-	require("toggleterm").exec("chrome " .. github_url, 98, nil, nil, nil, nil, false)
+	require("toggleterm").exec("chrome " .. url, 98, nil, nil, nil, nil, false)
 end
 
 M.term_toggle = function(cmd, direction, count)
@@ -269,6 +254,25 @@ M.term_toggle = function(cmd, direction, count)
 		count = count,
 	})
 	custom_toggle:toggle()
+end
+
+function M.update_python_env()
+	-- 获取当前工作目录
+	vim.defer_fn(function()
+		local workpath = vim.fn.getcwd()
+		-- 判断当前目录是否存在.python_version文件
+		local python_version_file = workpath .. "/.python-version"
+		local file_exist = io.open(python_version_file, "r") ~= nil
+		if file_exist then
+			-- 读取python版本号
+			local python_version = io.open(python_version_file, "r"):read("*l")
+			-- 获取pyenv的安装目录
+			local pyenv_root = vim.fn.getenv("PYENV_ROOT")
+			vim.fn.setenv("VIRTUAL_ENV", pyenv_root .. "/versions/" .. python_version)
+		else
+			vim.fn.setenv("VIRTUAL_ENV", nil)
+		end
+	end, 0)
 end
 
 return M

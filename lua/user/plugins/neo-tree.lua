@@ -8,11 +8,16 @@ return {
 			{
 				event = "neo_tree_window_before_open",
 				handler = function(_)
-					require("overseer").close()
-					if vim.fn.has("win32") == 0 then
+					local utils = require("astronvim.utils")
+					if utils.is_available("overseer") then
+						require("overseer").close()
+					end
+					if utils.is_available("nvim-dap-ui") then
 						require("dapui").close()
 					end
-					vim.cmd.UndotreeHide()
+					if utils.is_available("undotree") then
+						vim.cmd.UndotreeHide()
+					end
 				end,
 			},
 		}

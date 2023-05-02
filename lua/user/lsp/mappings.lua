@@ -15,9 +15,9 @@ return function(lsp_mappings)
 	}
 	lsp_mappings.n["<leader>h"] = {
 		function()
-			vim.lsp.buf.signature_help()
+			vim.lsp.buf.hover()
 		end,
-		desc = "Signature help",
+		desc = "Hover symbol details",
 	}
 	lsp_mappings.n["K"] = {
 		function()
@@ -27,16 +27,11 @@ return function(lsp_mappings)
 		desc = "CybuPrev",
 	}
 
-	if is_available('lsp_lines.nvim') then
+	if is_available("lsp_lines.nvim") then
 		lsp_mappings.n["<leader>ll"] = {
-			require('lsp_lines').toggle,
+			require("lsp_lines").toggle,
 			desc = "Toggle LSP lines",
 		}
-		-- vim.lsp.codelens.refresh()
-		-- lsp_mappings.n["<leader>lI"] = {
-		-- 	function() vim.lsp.codelens.refresh() end,
-		-- 	desc = "LSP CodeLens refresh",
-		-- }
 	end
 	return lsp_mappings
 end
