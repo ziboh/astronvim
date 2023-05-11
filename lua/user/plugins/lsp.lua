@@ -17,7 +17,7 @@ return {
 		},
 	},
 		{
-		"https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+		"ErichDonGubler/lsp_lines.nvim",
 		enabled = true,
 		opts = {
 			virtual_lines = { only_current_line = true },
