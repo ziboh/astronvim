@@ -1,9 +1,10 @@
+local utils = require("astronvim.utils")
 return {
 	"p00f/clangd_extensions.nvim", -- install lsp plugin
 	{
 		"williamboman/mason-lspconfig.nvim",
-		opts = function(_,opts)
-			opts.ensure_installed = { "clangd" }
+		opts = function(_, opts)
+			opts.ensure_installed = utils.list_insert_unique(opts.ensure_installed, { "rust_analyzer", "clangd" })
 		end,
 	},
 	{
@@ -15,7 +16,7 @@ return {
 			},
 		},
 	},
-	{
+		{
 		"https://git.sr.ht/~whynothugo/lsp_lines.nvim",
 		enabled = true,
 		opts = {

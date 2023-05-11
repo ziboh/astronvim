@@ -9,7 +9,7 @@ return {
 				event = "neo_tree_window_before_open",
 				handler = function(_)
 					local utils = require("astronvim.utils")
-					if utils.is_available("overseer") then
+					if utils.is_available("overseer.nvim") then
 						require("overseer").close()
 					end
 					if utils.is_available("nvim-dap-ui") then

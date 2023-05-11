@@ -2,6 +2,13 @@ return {
 	"nvim-neotest/neotest",
 	dependencies = {
 		"nvim-neotest/neotest-python",
+		"nvim-neotest/neotest-plenary",
+		{
+			"folke/neodev.nvim",
+			opts = function(_, opts)
+				opts.library = { plugins = { "neotest" }, types = true }
+			end,
+		},
 	},
 	config = function()
 		require("neotest").setup({
@@ -25,6 +32,7 @@ return {
 					-- Returns if a given file path is a test file.
 					-- NB: This function is called a lot so don't perform any heavy tasks within it.
 				}),
+				require("neotest-plenary").setup(),
 			},
 		})
 	end,
