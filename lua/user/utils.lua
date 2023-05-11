@@ -1,5 +1,5 @@
+local path = require("plenary.path")
 local M = {}
-HOME = os.getenv("HOME")
 
 function M.pick_windows()
 	local picker = require("window-picker")
@@ -30,14 +30,6 @@ M.find_next_start = function(str, cur_idx)
 		cur_idx = cur_idx + 1
 	end
 	return cur_idx
-end
-
-function M.print_table(tab)
-	local notify = ""
-	for _, value in pairs(tab) do
-		notify = notify .. value .. "  "
-	end
-	print(notify)
 end
 
 M.str2argtable = function(str)
@@ -90,7 +82,7 @@ M.get_workpath_python_resolve = function()
 	-- 获取当前工作目录
 	local workpath = vim.fn.getcwd()
 	-- 判断当前目录是否存在.python_version文件
-	local python_version_file = workpath .. "/.python-version"
+	local python_version_file = tostring(path:new(workpath, ".python_version"))
 	local file_exist = io.open(python_version_file, "r") ~= nil
 
 	if file_exist then
@@ -98,14 +90,14 @@ M.get_workpath_python_resolve = function()
 		local python_version = io.open(python_version_file, "r"):read("*l")
 		-- 获取pyenv的安装目录
 		local pyenv_root = vim.fn.getenv("PYENV_ROOT")
-		return pyenv_root .. "/versions/" .. python_version .. "/bin/python"
+		return tostring(path:new(pyenv_root, "versions", python_version, "bin", "python"))
 	end
 	if vim.fn.getenv("PYENV_ROOT") == nil then
 		-- 获取python的路径
-		local python_path = vim.fn.system("which python")
+		local python_path = vim.fn.system("where python")
 		return python_path
 	end
-	return vim.fn.getenv("PYENV_ROOT") .. "/shims/python"
+	return tostring(path:new(vim.fn.getenv("PYENV_ROOT"), "shims", "python"))
 end
 
 function M.run_current_python()
@@ -148,21 +140,6 @@ function M.close_undotree()
 	if undotree_win ~= nil then
 		vim.api.nvim_win_close(undotree_win, true)
 	end
-end
-
-function M.print_bufnr_filetype(ft)
-	local str = ""
-
-	-- 遍历所有 buffer
-	for _, buf in ipairs(vim.api.nvim_list_bufs()) do
-		local filetype = vim.api.nvim_buf_get_option(buf, "filetype")
-
-		-- 判断是否为 cybu 文件类型
-		if filetype == ft then
-			str = str .. buf .. "  "
-		end
-	end
-	print(str)
 end
 
 -- 获取当前光标所在的引号字符串
@@ -237,12 +214,12 @@ end
 
 function M.open_github_url()
 	local github_url = M.get_quoted_string()
-	require("toggleterm").exec("chrome https://github.com/" .. github_url, 98, nil, nil, nil, nil, false)
+	require("toggleterm").exec("open https://github.com/" .. github_url, 98, nil, nil, nil, nil, false)
 end
 
 function M.open_url()
 	local url = M.get_quoted_string()
-	require("toggleterm").exec("chrome " .. url, 98, nil, nil, nil, nil, false)
+	require("toggleterm").exec("open " .. url, 98, nil, nil, nil, nil, false)
 end
 
 M.term_toggle = function(cmd, direction, count)
@@ -261,14 +238,15 @@ function M.update_python_env()
 	vim.defer_fn(function()
 		local workpath = vim.fn.getcwd()
 		-- 判断当前目录是否存在.python_version文件
-		local python_version_file = workpath .. "/.python-version"
-		local file_exist = io.open(python_version_file, "r") ~= nil
+		local python_version_file = path:new(workpath, ".python-version")
+		local file_exist = python_version_file:exists()
 		if file_exist then
 			-- 读取python版本号
-			local python_version = io.open(python_version_file, "r"):read("*l")
+			local python_version = io.open(tostring(python_version_file), "r"):read("*l")
 			-- 获取pyenv的安装目录
 			local pyenv_root = vim.fn.getenv("PYENV_ROOT")
-			vim.fn.setenv("VIRTUAL_ENV", pyenv_root .. "/versions/" .. python_version)
+			local virtual_env_path = path:new(pyenv_root, "versions", python_version, "bin", "python")
+			vim.fn.setenv("VIRTUAL_ENV", tostring(virtual_env_path))
 		else
 			vim.fn.setenv("VIRTUAL_ENV", nil)
 		end
