@@ -3,6 +3,7 @@ return {
 	dependencies = {
 		"nvim-neotest/neotest-python",
 		"nvim-neotest/neotest-plenary",
+		"rouge8/neotest-rust",
 		{
 			"folke/neodev.nvim",
 			opts = function(_, opts)
@@ -32,7 +33,8 @@ return {
 					-- Returns if a given file path is a test file.
 					-- NB: This function is called a lot so don't perform any heavy tasks within it.
 				}),
-				require("neotest-plenary").setup(),
+				require("neotest-plenary"),
+				require("neotest-rust"),
 			},
 		})
 	end,
