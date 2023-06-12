@@ -12,7 +12,7 @@ return {
 			local dap = nil
 			opts.on_attach = function(_, bufnr)
 				local rt = require("rust-tools")
-				vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
+				vim.keymap.set("n", "<C-Space>", rt.hover_actions.hover_actions, { buffer = bufnr })
 				-- Code action groups
 				vim.keymap.set(
 					"n",
@@ -49,6 +49,9 @@ return {
 				dap = dap,
 			}
 		end,
+		config = function(_, opts)
+			require("rust-tools").setup(opts)
+		end,
 		dependencies = {
 			{
 				"jay-babu/mason-nvim-dap.nvim",
@@ -60,6 +63,7 @@ return {
 	},
 	{
 		"Saecki/crates.nvim",
+		enabled = true,
 		init = function()
 			vim.api.nvim_create_autocmd("BufRead", {
 				group = vim.api.nvim_create_augroup("CmpSourceCargo", { clear = true }),

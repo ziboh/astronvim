@@ -116,6 +116,7 @@ return {
 				["select_down"] = "<C-j>",
 			},
 			open_api_key_env = "OPENAI_API_KEY",
+			openai_api_url = "https://proxy.zzbbhh.sbs/proxy/api.openai.com/v1/chat/completions",
 			shortcuts = {
 				{
 					name = "textify",

@@ -10,7 +10,7 @@ return {
             -- You can use the capture groups defined in textobjects.scm
             ["af"] = "@function.outer",
             ["if"] = "@function.inner",
-            ["ac"] = "@class.outer",
+            ["ac"] = "@class.=outer",
             ["ic"] = "@class.inner",
             ["aC"] = "@conditional.outer",
             ["iC"] = "@conditional.inner",
@@ -45,7 +45,7 @@ return {
           },
         },
         swap = {
-          enable = true,
+          enable = false,
           swap_next = {
             ["<leader>a"] = "@parameter.inner",
           },
@@ -56,7 +56,7 @@ return {
         lsp_interop = {
           enable = true,
           border = 'none',
-          peek_definition_code = {
+          peek_definiparametertion_code = {
             ["<leader>pd"] = "@function.outer",
           },
         },

@@ -26,19 +26,20 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 -- 判断是否是wsl
-if vim.fn.has("wsl") == 1 then
-	---@diagnostic disable-next-line:undefined-field
-	vim.api.nvim_create_autocmd({ "FocusGained" }, {
-		callback = function()
-			vim.defer_fn(function()
-				local text = vim.fn.getreg("+")
-				---@diagnostic disable-next-line: undefined-field
-				text = text:gsub("\r", "")
-				vim.fn.setreg("+", text)
-			end, 0)
-		end,
-	})
-end
+-- if vim.fn.has("wsl") == 1 then
+-- 	---@diagnostic disable-next-line:undefined-field
+-- 	vim.api.nvim_create_autocmd({ "FocusGained" }, {
+-- 		callback = function()
+-- 			vim.defer_fn(function()
+-- 				local text = vim.fn.getreg("+")
+-- 				print("FocusGained text = "..text)
+-- 				---@diagnostic disable-next-line: undefined-field
+-- 				text = text:gsub("\r", "")
+-- 				vim.fn.setreg("+", text)
+-- 			end, 0)
+-- 		end,
+-- 	})
+-- end
 
 -- text like documents enable wrap and spell
 vim.api.nvim_create_autocmd("FileType", {

@@ -1,5 +1,6 @@
 return {
   "stevearc/overseer.nvim",
+  enabled = true,
   opts = {
     -- Default task strategy
     strategy = {
@@ -227,6 +228,6 @@ return {
     {'<leader>oo','<cmd>OverseerToggle<cr>',desc = 'Toggle Overseer'},
     {'<leader>os','<cmd>OverseerSaveBundle<cr>',desc = 'Save bundle'},
     {'<leader>ol','<cmd>OverseerLoadBundle<cr>',desc = 'Load bundle'},
-    {'<leader>or','<cmd>OverseerRunCmd<cr>',desc = 'Overseer run cmd'},
+    {'<leader>ow','<cmd>OverseerRunCmd<cr>',desc = 'Overseer run cmd'},
   },
 }

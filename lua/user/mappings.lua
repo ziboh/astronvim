@@ -52,11 +52,8 @@ return function(maps)
 	end
 
 	-- Overseer
-	if is_available("overseer.nvim") then
-		maps.n["<leader>o"] = sections.o
-	else
-		maps.n["<leader>o"] = false
-	end
+
+	maps.n["<leader>o"] = sections.o
 	maps.n["<leader>ou"] = { require("user.utils").open_url, desc = "Open url" }
 
 	-- Alpha
@@ -458,6 +455,25 @@ return function(maps)
 		end
 	end
 
+if is_available "smart-splits.nvim" then
+  maps.t["<C-h>"] = { function() require("smart-splits").move_cursor_left() end, desc = "Move to left split" }
+  maps.t["<C-j>"] = { function() require("smart-splits").move_cursor_down() end, desc = "Move to below split" }
+  maps.t["<C-k>"] = { function() require("smart-splits").move_cursor_up() end, desc = "Move to above split" }
+  maps.t["<C-l>"] = { function() require("smart-splits").move_cursor_right() end, desc = "Move to right split" }
+  maps.t["<C-Up>"] = { function() require("smart-splits").resize_up() end, desc = "Resize split up" }
+  maps.t["<C-Down>"] = { function() require("smart-splits").resize_down() end, desc = "Resize split down" }
+  maps.t["<C-Left>"] = { function() require("smart-splits").resize_left() end, desc = "Resize split left" }
+  maps.t["<C-Right>"] = { function() require("smart-splits").resize_right() end, desc = "Resize split right" }
+else   
+  maps.t["<C-h>"] = { "<C-w>h", desc = "Move to left split" }
+  maps.t["<C-j>"] = { "<C-w>j", desc = "Move to below split" }
+  maps.t["<C-k>"] = { "<C-w>k", desc = "Move to above split" }
+  maps.t["<C-l>"] = { "<C-w>l", desc = "Move to right split" }
+  maps.t["<C-Up>"] = { "<cmd>resize -2<CR>", desc = "Resize split up" }
+  maps.t["<C-Down>"] = { "<cmd>resize +2<CR>", desc = "Resize split down" }
+  maps.t["<C-Left>"] = { "<cmd>vertical resize -2<CR>", desc = "Resize split left" }
+  maps.t["<C-Right>"] = { "<cmd>vertical resize +2<CR>", desc = "Resize split right" }
+end
 	-- neoai
 	if is_available("neoai.nvim") then
 		maps.n["<leader>a"] = sections.a

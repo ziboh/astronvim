@@ -253,4 +253,14 @@ function M.update_python_env()
 	end, 0)
 end
 
+
+function M.is_current_cwd(cwd)
+	local current_cwd = vim.fn.getcwd()
+	if current_cwd == cwd then
+		return true
+	else
+		return false
+	end
+end
+
 return M
