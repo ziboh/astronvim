@@ -10,8 +10,10 @@ return {
   { import = "astrocommunity.motion.flash-nvim" },
   { import = "astrocommunity.editing-support.dial-nvim" },
   { import = "astrocommunity.editing-support.yanky-nvim" },
-  { import = "astrocommunity.editing-support.multicursors-nvim" },
   { import = "astrocommunity.colorscheme.catppuccin" },
   { import = "astrocommunity.color.ccc-nvim" },
   { import = "astrocommunity.recipes.neovide" },
+  { import = "astrocommunity.recipes.vscode" },
+  { import = "astrocommunity.pack.lua" },
+  { import = "astrocommunity.pack.python" },
 }

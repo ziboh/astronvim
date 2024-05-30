@@ -1,7 +1,7 @@
-# 判断系统是不是windows
-if vim.fn.has('win32') == 1 then
-  vim.g.python3_host_prog = 'C:\\应用\\pyenv-win\\pyenv-win\\versions\\3.11.3\\python.exe'
-  vim.g.python_host_prog = 'C:\\应用\\pyenv-win\\pyenv-win\\versions\\3.11.3\\python.exe'
+-- 判断系统是不是windows
+if vim.fn.has "win32" == 1 then
+  vim.g.python3_host_prog = "C:\\应用\\pyenv-win\\pyenv-win\\versions\\3.11.3\\python.exe"
+  vim.g.python_host_prog = "C:\\应用\\pyenv-win\\pyenv-win\\versions\\3.11.3\\python.exe"
 end
 
 require("lazy").setup({
