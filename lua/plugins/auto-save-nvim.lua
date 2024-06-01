@@ -2,7 +2,7 @@ return {
   "pocco81/auto-save.nvim",
 
   opts = {
-    enabled = true, -- start auto-save when the plugin is loaded (i.e. when your package manager loads it)
+    enabled = false, -- start auto-save when the plugin is loaded (i.e. when your package manager loads it)
     execution_message = {
       message = function() -- message to print on save
         return ("AutoSave: saved at " .. vim.fn.strftime "%H:%M:%S")
