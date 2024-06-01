@@ -18,4 +18,10 @@ return {
   { import = "astrocommunity.pack.python" },
   { import = "astrocommunity.markdown-and-latex.glow-nvim" },
   { import = "astrocommunity.git.blame-nvim" },
+  { import = "astrocommunity.recipes.heirline-mode-text-statusline" },
+  { import = "astrocommunity.utility.noice-nvim" },
+  { import = "astrocommunity.utility.telescope-fzy-native-nvim" },
+  { import = "astrocommunity.utility.telescope-live-grep-args-nvim" },
+  { import = "astrocommunity.utility.telescope-live-grep-args-nvim" },
+  { import = "astrocommunity.editing-support.auto-save-nvim" },
 }
