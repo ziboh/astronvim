@@ -22,6 +22,4 @@ return {
   { import = "astrocommunity.utility.noice-nvim" },
   { import = "astrocommunity.utility.telescope-fzy-native-nvim" },
   { import = "astrocommunity.utility.telescope-live-grep-args-nvim" },
-  { import = "astrocommunity.utility.telescope-live-grep-args-nvim" },
-  { import = "astrocommunity.editing-support.auto-save-nvim" },
 }
