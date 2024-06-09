@@ -1,6 +1,4 @@
-if true then return {} end
 return {
-
   {
     "luozhiya/fittencode.nvim",
     event = "User AstroFile",
@@ -85,6 +83,9 @@ return {
       -- the function is lazy loaded so cmp is able to be required
       local cmp = require "cmp"
       -- modify the sources part of the options table
+      opts.mapping = {
+        ["<cr>"] = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Insert, select = false },
+      }
       opts.sources = cmp.config.sources {
         { name = "nvim_lsp", priority = 1000 },
         { name = "luasnip", priority = 750 },
