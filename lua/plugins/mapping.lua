@@ -88,7 +88,9 @@ return {
     maps.n["<leader>wf"] = { "<c-w>pa", desc = "switch window" }
 
     maps.v["L"] = { "$h", desc = "Move to end of line" }
+    maps.o["L"] = { "$", desc = "Move to end of line" }
     maps.v["H"] = { "^", desc = "Move to first non-blank character" }
+    maps.o["H"] = { "^", desc = "Move to first non-blank character" }
     maps.v["<A-j>"] = { ":m '>+1<CR>gv-gv", desc = "Move line down" }
     maps.v["<A-k>"] = { ":m '<-2<CR>gv-gv", desc = "Move line up" }
 
