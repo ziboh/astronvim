@@ -4,75 +4,7 @@ return {
     event = "User AstroFile",
     cmd = "Fitten",
     opts = {
-      action = {
-        document_code = {
-          -- Show "Fitten Code - Document Code" in the editor context menu, when you right-click on the code.
-          show_in_editor_context_menu = true,
-        },
-        edit_code = {
-          -- Show "Fitten Code - Edit Code" in the editor context menu, when you right-click on the code.
-          show_in_editor_context_menu = true,
-        },
-        explain_code = {
-          -- Show "Fitten Code - Explain Code" in the editor context menu, when you right-click on the code.
-          show_in_editor_context_menu = true,
-        },
-        find_bugs = {
-          -- Show "Fitten Code - Find Bugs" in the editor context menu, when you right-click on the code.
-          show_in_editor_context_menu = true,
-        },
-        generate_unit_test = {
-          -- Show "Fitten Code - Generate UnitTest" in the editor context menu, when you right-click on the code.
-          show_in_editor_context_menu = true,
-        },
-        start_chat = {
-          -- Show "Fitten Code - Start Chat" in the editor context menu, when you right-click on the code.
-          show_in_editor_context_menu = true,
-        },
-      },
-      disable_specific_inline_completion = {
-        -- Disable auto-completion for some specific file suffixes by entering them below
-        -- For example, `suffixes = {'lua', 'cpp'}`
-        suffixes = {},
-      },
-      inline_completion = {
-        -- Enable inline code completion.
-        ---@type boolean
-        enable = true,
-        -- Disable auto completion when the cursor is within the line.
-        ---@type boolean
-        disable_completion_within_the_line = false,
-        -- Disable auto completion when pressing Backspace or Delete.
-        ---@type boolean
-        disable_completion_when_delete = false,
-        -- Auto triggering completion
-        ---@type boolean
-        auto_triggering_completion = true,
-      },
-      delay_completion = {
-        -- Delay time for inline completion (in milliseconds).
-        ---@type integer
-        delaytime = 0,
-      },
-      -- Enable/Disable the default keymaps in inline completion.
-      use_default_keymaps = true,
-      -- Setting for source completion.
-      source_completion = {
-        -- Enable source completion.
-        enable = true,
-      },
-      -- Set the mode of the completion.
-      -- Available options:
-      -- - 'inline' (VSCode style inline completion)
-      -- - 'source' (integrates into other completion plugins)
-      completion_mode = "source",
-      ---@class LogOptions
-      log = {
-        -- Log level.
-        level = vim.log.levels.WARN,
-        -- Max log file size in MB, default is 10MB
-        max_size = 10,
-      },
+      completion_mode = 'source',
     },
   },
   { -- override nvim-cmp plugin
@@ -97,6 +29,7 @@ return {
           priority = 10000,
         },
       }
+      opts.mapping["<CR>"] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Insert, select = false })
     end,
   },
 }
