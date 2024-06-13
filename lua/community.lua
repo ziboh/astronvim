@@ -12,7 +12,6 @@ return {
   { import = "astrocommunity.git.neogit" },
   { import = "astrocommunity.colorscheme.catppuccin" },
   { import = "astrocommunity.color.ccc-nvim" },
-  { import = "astrocommunity.recipes.neovide" },
   { import = "astrocommunity.recipes.vscode" },
   { import = "astrocommunity.pack.lua" },
   { import = "astrocommunity.pack.rust" },
@@ -20,7 +19,7 @@ return {
   { import = "astrocommunity.markdown-and-latex.glow-nvim" },
   { import = "astrocommunity.git.blame-nvim" },
   { import = "astrocommunity.recipes.heirline-mode-text-statusline" },
-  { import = "astrocommunity.utility.noice-nvim" },
+  { import = "astrocommunity.motion.tabout-nvim" },
   { import = "astrocommunity.utility.telescope-fzy-native-nvim" },
   { import = "astrocommunity.utility.telescope-live-grep-args-nvim" },
 }
