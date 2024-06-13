@@ -97,7 +97,6 @@ return {
           priority = 10000,
         },
       }
-      opts.mapping["<C-m>"] = cmp.mapping.select_prev_item()
     end,
   },
 }
