@@ -1,5 +1,4 @@
 return {
-
   "AstroNvim/astrocore",
   opts = function(_, opts)
     local maps = opts.mappings
